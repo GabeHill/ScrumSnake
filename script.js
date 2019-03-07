@@ -12,7 +12,12 @@ var traceback = [];
 var possibleDir = [];
 var currentPlace = [];
 
-var boxX;
+var leftkey;
+var rightkey;
+var upkey;
+var downkey;
+
+var snake1X;
 var boxY;
 var alive = true;
 var snake_color = 'rgb(200,30,100)';
@@ -62,39 +67,14 @@ function addToStack(x, y){
 }
 
 //generate the starting point
-//Not yet done
 function generateFirstBlock(){
   var startX;
   var startY;
 
-  if (rand == 0){
-    //snake starts on top
-    startX = Math.floor(Math.random() * ((BOARD_WIDTH - 1) / 2)) * 2 + 1;
-    startY = 1;
+  startX = 4;
+  startY = 16;
 
-    addToStack(startX, startY);
-  }else if (rand == 1){
-    //snake starts on right side
-    startX = BOARD_WIDTH - 2;
-    startY = Math.floor(Math.random() * ((BOARD_WIDTH - 1) / 2)) * 2 + 1;
-
-    addToStack(startX, startY);
-  }else if (rand == 2){
-    //snake starts on bottom side
-    startX = Math.floor(Math.random() * ((BOARD_WIDTH - 1) / 2)) * 2 + 1;
-    startY = BOARD_HEIGHT - 2;
-    
-    addToStack(startX, startY);
-  }else{
-    //snake starts on left side
-    startX = 1;
-    startY = Math.floor(Math.random() * ((BOARD_WIDTH - 1) / 2)) * 2 + 1;
-
-    addToStack(startX, startY);
-  }
   grid[startX][startY] = 1;
-  console.log(`startX: ${startX}`)
-  console.log(`startY: ${startY}`)
 }
 
 var snake1X;
@@ -106,8 +86,43 @@ var snake2Y;
 //not yet done
 function move(){
   checkMove();
+
+  var gridX;
+  var gridY;
+  drawSquare(snake1X, snake1Y, snake_color);
   
-  
+  if(leftkey){
+    snake1X -= BLOCK_SIZE;
+    gridX = snake1X / BLOCK_SIZE;
+    gridY = boxY / BLOCK_SIZE;
+    if(grid[gridX][gridY] == 0){
+      snake1X -= BLOCK_SIZE;
+    }
+  }
+  if(rightkey){
+    snake1X -= BLOCK_SIZE;
+    gridX = snake1X / BLOCK_SIZE;
+    gridY = boxY / BLOCK_SIZE;
+    if(grid[gridX][gridY] == 0){
+      snake1X += BLOCK_SIZE;
+    }
+  }
+  if(upkey){
+    snake1Y -= BLOCK_SIZE;
+    gridX = snake1X / BLOCK_SIZE;
+    gridY = boxY / BLOCK_SIZE;
+    if(grid[gridX][gridY] == 0){
+      snake1Y -= BLOCK_SIZE;
+    }
+  }
+  if(downkey){
+    snake1Y -= BLOCK_SIZE;
+    gridX = snake1X / BLOCK_SIZE;
+    gridY = boxY / BLOCK_SIZE;
+    if(grid[gridX][gridY] == 0){
+      snake1Y += BLOCK_SIZE;
+    }
+  }
 }
 
 //check to see if a move is possible
@@ -124,10 +139,10 @@ function play(){
   generateFirstBlock();
   
   // do{
-  //   move();
+    move();
   // }while(alive);
+
   drawBoard();
-  
 }
 
 function interv(){
@@ -144,35 +159,31 @@ var KEYCODE_DOWN = 40;
 function handleKeyDown(evt) {
   if(!evt){ var evt = window.event; }  //browser compatibility
     temp = {
-      x: boxX,
-      y: boxY
+      x: snake1X,
+      y: snake1Y
     };
   switch(evt.keyCode) {
     case KEYCODE_LEFT:  
       if(grid[(temp.x/BLOCK_SIZE) - 1][temp.y/BLOCK_SIZE] === 0 ){
-        boxX -= BLOCK_SIZE;
+        snake1X -= BLOCK_SIZE;
       }
       break;
     case KEYCODE_RIGHT: 
       if(grid[(temp.x/BLOCK_SIZE) + 1][temp.y/BLOCK_SIZE] === 0){
-        boxX +=BLOCK_SIZE;
+        snake1X +=BLOCK_SIZE;
       }
       break;
     case KEYCODE_UP: 
       if(grid[temp.x/BLOCK_SIZE][(temp.y/BLOCK_SIZE) - 1] === 0){
-        boxY -=BLOCK_SIZE;
+        snake1Y -=BLOCK_SIZE;
       }
       break;
     case KEYCODE_DOWN: 
       if(grid[temp.x/BLOCK_SIZE][(temp.y/BLOCK_SIZE) + 1] === 0){
-        boxY +=BLOCK_SIZE;
+        snake1Y +=BLOCK_SIZE;
       }
       break;
     default:
-  }
-  console.log("End: " + endPoint.x, endPoint.y);
-  if(boxX/BLOCK_SIZE === endPoint.x && boxY/BLOCK_SIZE === endPoint.y){
-    celbr();
   }
 }
  
