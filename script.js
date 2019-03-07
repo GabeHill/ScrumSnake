@@ -74,8 +74,8 @@ var snake2X;
 var snake2Y;
 
 function initializeSnake1Location() {
-  snake1X = 4;
-  snake1Y = 16;
+  snake1X = 4 * BLOCK_SIZE;
+  snake1Y = 16 * BLOCK_SIZE;
 }
 
 //move the current place of the avatar
@@ -92,7 +92,7 @@ function move(){
     gridX = snake1X / BLOCK_SIZE;
     gridY = snake1Y / BLOCK_SIZE;
     if(grid[gridX][gridY] == 0){
-      snake1X -= BLOCK_SIZE;
+      snake1X -= BLOCK_SIZE / 25;
     }
   }
   if(rightkey){
@@ -100,7 +100,7 @@ function move(){
     gridX = snake1X / BLOCK_SIZE;
     gridY = snake1Y / BLOCK_SIZE;
     if(grid[gridX][gridY] == 0){
-      snake1X += BLOCK_SIZE;
+      snake1X += BLOCK_SIZE / 25;
     }
   }
   if(upkey){
@@ -108,7 +108,7 @@ function move(){
     gridX = snake1X / BLOCK_SIZE;
     gridY = snake1Y / BLOCK_SIZE;
     if(grid[gridX][gridY] == 0){
-      snake1Y -= BLOCK_SIZE;
+      snake1Y -= BLOCK_SIZE / 25;
     }
   }
   if(downkey){
@@ -116,7 +116,7 @@ function move(){
     gridX = snake1X / BLOCK_SIZE;
     gridY = snake1Y / BLOCK_SIZE;
     if(grid[gridX][gridY] == 0){
-      snake1Y += BLOCK_SIZE;
+      snake1Y += BLOCK_SIZE / 25;
     }
   }
   drawSquare(snake1X, snake1Y, snake_color);
