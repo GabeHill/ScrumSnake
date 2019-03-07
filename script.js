@@ -6,11 +6,14 @@ var BOARD_WIDTH = 50;
 var BOARD_HEIGHT = 32;
 var BLOCK_SIZE = 20;
 var BOARD_SPACES = (BOARD_HEIGHT * BOARD_WIDTH);
+var rand = Math.floor(Math.random() * 4);
 
 var traceback = [];
 var possibleDir = [];
 var currentPlace = [];
 
+var boxX;
+var boxY;
 var alive = true;
 var snake_color = 'rgb(200,30,100)';
 
@@ -45,16 +48,59 @@ function drawBoard(){
     for(var x=0; x<BOARD_WIDTH; x++){
       if(grid[x][y] === 0){
         drawSquare(x*BLOCK_SIZE, y*BLOCK_SIZE, 'rgb(100,100,100)');
-      } 
+      }
+      else if(grid[x][y] == 1){
+        drawSquare(x*BLOCK_SIZE, y*BLOCK_SIZE, snake_color);
+      }
     }
   }
+}
+
+//adds x and y coords to traceback array
+function addToStack(x, y){
+  traceback.push( {x: x, y: y} );
 }
 
 //generate the starting point
 //Not yet done
 function generateFirstBlock(){
+  var startX;
+  var startY;
 
+  if (rand == 0){
+    //snake starts on top
+    startX = Math.floor(Math.random() * ((BOARD_WIDTH - 1) / 2)) * 2 + 1;
+    startY = 1;
+
+    addToStack(startX, startY);
+  }else if (rand == 1){
+    //snake starts on right side
+    startX = BOARD_WIDTH - 2;
+    startY = Math.floor(Math.random() * ((BOARD_WIDTH - 1) / 2)) * 2 + 1;
+
+    addToStack(startX, startY);
+  }else if (rand == 2){
+    //snake starts on bottom side
+    startX = Math.floor(Math.random() * ((BOARD_WIDTH - 1) / 2)) * 2 + 1;
+    startY = BOARD_HEIGHT - 2;
+    
+    addToStack(startX, startY);
+  }else{
+    //snake starts on left side
+    startX = 1;
+    startY = Math.floor(Math.random() * ((BOARD_WIDTH - 1) / 2)) * 2 + 1;
+
+    addToStack(startX, startY);
+  }
+  grid[startX][startY] = 1;
+  console.log(`startX: ${startX}`)
+  console.log(`startY: ${startY}`)
 }
+
+var snake1X;
+var snake1Y;
+var snake2X;
+var snake2Y;
 
 //move the current place of the avatar
 //not yet done
