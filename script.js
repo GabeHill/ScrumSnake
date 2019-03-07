@@ -12,11 +12,6 @@ var traceback = [];
 var possibleDir = [];
 var currentPlace = [];
 
-var leftkey;
-var rightkey;
-var upkey;
-var downkey;
-
 var snake1X;
 var boxY;
 var alive = true;
@@ -25,10 +20,6 @@ var snake_color = 'rgb(200,30,100)';
 var time  = 0;
 var inter = setInterval(interv, 1000);
 
-var START_POINT = {
-    x : 0,
-    y : 0
-};
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -82,6 +73,11 @@ var snake1Y;
 var snake2X;
 var snake2Y;
 
+function initializeSnake1Location() {
+  snake1X = 4;
+  snake1Y = 16;
+}
+
 //move the current place of the avatar
 //not yet done
 function move(){
@@ -94,15 +90,15 @@ function move(){
   if(leftkey){
     snake1X -= BLOCK_SIZE;
     gridX = snake1X / BLOCK_SIZE;
-    gridY = boxY / BLOCK_SIZE;
+    gridY = snake1Y / BLOCK_SIZE;
     if(grid[gridX][gridY] == 0){
       snake1X -= BLOCK_SIZE;
     }
   }
   if(rightkey){
-    snake1X -= BLOCK_SIZE;
+    snake1X += BLOCK_SIZE;
     gridX = snake1X / BLOCK_SIZE;
-    gridY = boxY / BLOCK_SIZE;
+    gridY = snake1Y / BLOCK_SIZE;
     if(grid[gridX][gridY] == 0){
       snake1X += BLOCK_SIZE;
     }
@@ -110,19 +106,20 @@ function move(){
   if(upkey){
     snake1Y -= BLOCK_SIZE;
     gridX = snake1X / BLOCK_SIZE;
-    gridY = boxY / BLOCK_SIZE;
+    gridY = snake1Y / BLOCK_SIZE;
     if(grid[gridX][gridY] == 0){
       snake1Y -= BLOCK_SIZE;
     }
   }
   if(downkey){
-    snake1Y -= BLOCK_SIZE;
+    snake1Y += BLOCK_SIZE;
     gridX = snake1X / BLOCK_SIZE;
-    gridY = boxY / BLOCK_SIZE;
+    gridY = snake1Y / BLOCK_SIZE;
     if(grid[gridX][gridY] == 0){
       snake1Y += BLOCK_SIZE;
     }
   }
+  drawSquare(snake1X, snake1Y, snake_color);
 }
 
 //check to see if a move is possible
@@ -133,13 +130,17 @@ function checkMove(){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+var gameInterval = setInterval(move, 100);
+
 //start the game
 function play(){
   buildGrid();
   generateFirstBlock();
+  initializeSnake1Location();
+  gameInterval;
   
   // do{
-    move();
+    // move();
   // }while(alive);
 
   drawBoard();
@@ -154,52 +155,50 @@ var KEYCODE_UP = 38;
 var KEYCODE_RIGHT = 39;
 var KEYCODE_DOWN = 40;
 
+var leftkey = false;
+var rightkey = false;
+var upkey = false;
+var downkey = false;
+
 //event handler for key being pressed
 //moves player in direction of arrow keys while held down
 function handleKeyDown(evt) {
   if(!evt){ var evt = window.event; }  //browser compatibility
-    temp = {
-      x: snake1X,
-      y: snake1Y
-    };
-  switch(evt.keyCode) {
-    case KEYCODE_LEFT:  
-      if(grid[(temp.x/BLOCK_SIZE) - 1][temp.y/BLOCK_SIZE] === 0 ){
-        snake1X -= BLOCK_SIZE;
-      }
-      break;
-    case KEYCODE_RIGHT: 
-      if(grid[(temp.x/BLOCK_SIZE) + 1][temp.y/BLOCK_SIZE] === 0){
-        snake1X +=BLOCK_SIZE;
-      }
-      break;
-    case KEYCODE_UP: 
-      if(grid[temp.x/BLOCK_SIZE][(temp.y/BLOCK_SIZE) - 1] === 0){
-        snake1Y -=BLOCK_SIZE;
-      }
-      break;
-    case KEYCODE_DOWN: 
-      if(grid[temp.x/BLOCK_SIZE][(temp.y/BLOCK_SIZE) + 1] === 0){
-        snake1Y +=BLOCK_SIZE;
-      }
-      break;
-    default:
+  
+  switch (evt.keyCode) {
+    case KEYCODE_LEFT:
+      leftkey = true;
+      return false;
+    case KEYCODE_RIGHT:
+      rightkey = true;
+      return false;
+    case KEYCODE_UP:
+      upkey = true;
+      return false;
+    case KEYCODE_DOWN:
+      downkey = true;
+      return false;
+    }
   }
-}
  
 //event handler for a key being released
 //currently breaks the previous event handler. Will need revision
 function handleKeyUp(evt) {
   if(!evt){ var evt = window.event; }  //browser compatibility
   switch(evt.keyCode) {
-    case KEYCODE_LEFT:  console.log(evt.keyCode+" up"); break;
-    case KEYCODE_RIGHT:   console.log(evt.keyCode+" up"); break;
-    case KEYCODE_UP:    console.log(evt.keyCode+" up"); break;
-    case KEYCODE_DOWN:  console.log(evt.keyCode+" up"); break;
+    case KEYCODE_LEFT:
+      leftkey = false;
+      break;
+    case KEYCODE_RIGHT:
+      rightkey = false;
+      break;
+    case KEYCODE_UP:
+      upkey = false;
+      break;
+    case KEYCODE_DOWN:
+      downkey = false;
+      break;
   }
-
-  ctx.clearRect(0,0,500,500);
-  drawBoard();
 }
 
 document.onkeydown = handleKeyDown;
