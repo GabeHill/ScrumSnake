@@ -15,7 +15,7 @@ fx=fy=15;
 //x velocity and y velocity
 xv=yv=0;
 trail=[];
-tail = 5;
+tail = 1;
 function game() {
   snakeX+=xv;
   snakeY+=yv;
@@ -40,7 +40,10 @@ function game() {
   for(var i=0;i<trail.length;i++) {
       ctx.fillRect(trail[i].x*gs,trail[i].y*gs,gs-2,gs-2);
       if(trail[i].x==snakeX && trail[i].y==snakeY) {
-        tail = 5;
+        if(tail > 1){
+          DedSnek();
+        }
+        
       }
   }
 
