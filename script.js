@@ -1,217 +1,81 @@
-var canvas = document.getElementById('board');
-var ctx = canvas.getContext('2d');
+//reference video: https://www.youtube.com/watch?v=xGmXxpIj6vs
+window.onload=function() {
+  canv=document.getElementById("board");
+  ctx=canv.getContext("2d");
+  document.addEventListener("keydown",keyPush);
+  setInterval(game,1000/15);
+}
+var snake_color = '#A7FF12';
+//location of snake
+snakeX=snakeY=10;
+//grid size and tile count
+gs=tc=25;
+//fruit x and fruit y
+fx=fy=15;
+//x velocity and y velocity
+xv=yv=0;
+trail=[];
+tail = 5;
+function game() {
+  snakeX+=xv;
+  snakeY+=yv;
+  if(snakeX<0) {
+      snakeX= tc-1;
+  }
+  if(snakeX>tc-1) {
+      snakeX= 0;
+  }
+  if(snakeY<0) {
+      snakeY= tc-1;
+  }
+  if(snakeY>tc-1) {
+      snakeY= 0;
+  }
+  ctx.fillStyle="rgb(100,100,100)";
+  ctx.fillRect(0,0,canv.width,canv.height);
 
-var grid = [];
-var BOARD_WIDTH = 50;
-var BOARD_HEIGHT = 32;
-var BLOCK_SIZE = 20;
-var BOARD_SPACES = (BOARD_HEIGHT * BOARD_WIDTH);
-var rand = Math.floor(Math.random() * 4);
-
-var traceback = [];
-var possibleDir = [];
-var currentPlace = [];
-
-var leftkey;
-var rightkey;
-var upkey;
-var downkey;
-
-var snake1X;
-var boxY;
-var alive = true;
-var snake_color = 'rgb(200,30,100)';
-
-var time  = 0;
-var inter = setInterval(interv, 1000);
-
-var START_POINT = {
-    x : 0,
-    y : 0
-};
-
-//////////////////////////////////////////////////////////////////////////////
-
-//build the baseline grid
-function buildGrid(){
-    for(var y=0; y<BOARD_HEIGHT; y++){
-      for(var x=0; x<BOARD_WIDTH; x++){
-        grid[x][y] = 0;
+  ctx.fillStyle=snake_color;
+  for(var i=0;i<trail.length;i++) {
+      ctx.fillRect(trail[i].x*gs,trail[i].y*gs,gs-2,gs-2);
+      if(trail[i].x==snakeX && trail[i].y==snakeY) {
+          tail = 5;
       }
-    }
-}
-
-//draw an individual square space on the canvas
-function drawSquare(x, y, color) {
-  ctx.fillStyle = color;
-  ctx.fillRect(x, y, BLOCK_SIZE, BLOCK_SIZE);
-}
-
-//draw the board on the canvas
-function drawBoard(){
-  for(var y=0; y<BOARD_HEIGHT; y++){
-    for(var x=0; x<BOARD_WIDTH; x++){
-      if(grid[x][y] === 0){
-        drawSquare(x*BLOCK_SIZE, y*BLOCK_SIZE, 'rgb(100,100,100)');
-      }
-      else if(grid[x][y] == 1){
-        drawSquare(x*BLOCK_SIZE, y*BLOCK_SIZE, snake_color);
-      }
-    }
   }
-}
 
-//adds x and y coords to traceback array
-function addToStack(x, y){
-  traceback.push( {x: x, y: y} );
-}
-
-//generate the starting point
-function generateFirstBlock(){
-  var startX;
-  var startY;
-
-  startX = 4;
-  startY = 16;
-
-  grid[startX][startY] = 1;
-}
-
-var snake1X;
-var snake1Y;
-var snake2X;
-var snake2Y;
-
-//move the current place of the avatar
-//not yet done
-function move(){
-  checkMove();
-
-  var gridX;
-  var gridY;
-  drawSquare(snake1X, snake1Y, snake_color);
-  
-  if(leftkey){
-    snake1X -= BLOCK_SIZE;
-    gridX = snake1X / BLOCK_SIZE;
-    gridY = boxY / BLOCK_SIZE;
-    if(grid[gridX][gridY] == 0){
-      snake1X -= BLOCK_SIZE;
-    }
+  trail.push({x:snakeX,y:snakeY});
+  while(trail.length>tail) {
+  trail.shift();
   }
-  if(rightkey){
-    snake1X -= BLOCK_SIZE;
-    gridX = snake1X / BLOCK_SIZE;
-    gridY = boxY / BLOCK_SIZE;
-    if(grid[gridX][gridY] == 0){
-      snake1X += BLOCK_SIZE;
-    }
+
+  if(fx==snakeX && fy==snakeY) {
+      tail++;
+      fx=Math.floor(Math.random()*tc);
+      fy=Math.floor(Math.random()*tc);
   }
-  if(upkey){
-    snake1Y -= BLOCK_SIZE;
-    gridX = snake1X / BLOCK_SIZE;
-    gridY = boxY / BLOCK_SIZE;
-    if(grid[gridX][gridY] == 0){
-      snake1Y -= BLOCK_SIZE;
-    }
-  }
-  if(downkey){
-    snake1Y -= BLOCK_SIZE;
-    gridX = snake1X / BLOCK_SIZE;
-    gridY = boxY / BLOCK_SIZE;
-    if(grid[gridX][gridY] == 0){
-      snake1Y += BLOCK_SIZE;
-    }
-  }
+  ctx.fillStyle="red";
+  ctx.fillRect(fx*gs,fy*gs,gs-2,gs-2);
+  console.log('x: '+ fx);
+  console.log('y: '+ fy);
 }
 
-//check to see if a move is possible
-//not yet done
-function checkMove(){
+var KEYCODE_W = 87;
+var KEYCODE_A = 65;
+var KEYCODE_S = 83;
+var KEYCODE_D = 68;
 
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
-//start the game
-function play(){
-  buildGrid();
-  generateFirstBlock();
-  
-  // do{
-    move();
-  // }while(alive);
-
-  drawBoard();
-}
-
-function interv(){
-  time+=1;
-}
-
-var KEYCODE_LEFT = 37;
-var KEYCODE_UP = 38;
-var KEYCODE_RIGHT = 39;
-var KEYCODE_DOWN = 40;
-
-//event handler for key being pressed
-//moves player in direction of arrow keys while held down
-function handleKeyDown(evt) {
-  if(!evt){ var evt = window.event; }  //browser compatibility
-    temp = {
-      x: snake1X,
-      y: snake1Y
-    };
+function keyPush(evt) {
   switch(evt.keyCode) {
-    case KEYCODE_LEFT:  
-      if(grid[(temp.x/BLOCK_SIZE) - 1][temp.y/BLOCK_SIZE] === 0 ){
-        snake1X -= BLOCK_SIZE;
-      }
-      break;
-    case KEYCODE_RIGHT: 
-      if(grid[(temp.x/BLOCK_SIZE) + 1][temp.y/BLOCK_SIZE] === 0){
-        snake1X +=BLOCK_SIZE;
-      }
-      break;
-    case KEYCODE_UP: 
-      if(grid[temp.x/BLOCK_SIZE][(temp.y/BLOCK_SIZE) - 1] === 0){
-        snake1Y -=BLOCK_SIZE;
-      }
-      break;
-    case KEYCODE_DOWN: 
-      if(grid[temp.x/BLOCK_SIZE][(temp.y/BLOCK_SIZE) + 1] === 0){
-        snake1Y +=BLOCK_SIZE;
-      }
-      break;
-    default:
+      case KEYCODE_A:
+          xv=-1;yv=0;
+          break;
+      case KEYCODE_W:
+          xv=0;yv=-1;
+          break;
+      case KEYCODE_D:
+          xv=1;yv=0;
+          break;
+      case KEYCODE_S:
+          xv=0;yv=1;
+          break;
   }
 }
- 
-//event handler for a key being released
-//currently breaks the previous event handler. Will need revision
-function handleKeyUp(evt) {
-  if(!evt){ var evt = window.event; }  //browser compatibility
-  switch(evt.keyCode) {
-    case KEYCODE_LEFT:  console.log(evt.keyCode+" up"); break;
-    case KEYCODE_RIGHT:   console.log(evt.keyCode+" up"); break;
-    case KEYCODE_UP:    console.log(evt.keyCode+" up"); break;
-    case KEYCODE_DOWN:  console.log(evt.keyCode+" up"); break;
-  }
-
-  ctx.clearRect(0,0,500,500);
-  drawBoard();
-}
-
-document.onkeydown = handleKeyDown;
-document.onkeyup = handleKeyUp;
-
-////////////////////////////////////////////////////////////////////////////////////
-//initializes the grid
-for(var i = 0; i<BOARD_WIDTH; i++){
-  grid[i] = [];
-  for(var j=0; j<BOARD_HEIGHT; j++){
-    grid[i][j] = 1;
-  }
-}
-
-play();
