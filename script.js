@@ -1,4 +1,3 @@
-//reference video: https://www.youtube.com/watch?v=xGmXxpIj6vs
 window.onload=function() {
   canv=document.getElementById("board");
   ctx=canv.getContext("2d");
@@ -15,30 +14,35 @@ fx=fy=15;
 //x velocity and y velocity
 xv=yv=0;
 trail=[];
-tail = 5;
+tail = 1;
 function game() {
   snakeX+=xv;
   snakeY+=yv;
   if(snakeX<0) {
-      snakeX= tc-1;
+      DedSnek();
   }
   if(snakeX>tc-1) {
-      snakeX= 0;
+    DedSnek();
   }
   if(snakeY<0) {
-      snakeY= tc-1;
+    DedSnek();
   }
   if(snakeY>tc-1) {
-      snakeY= 0;
+    DedSnek();
   }
   ctx.fillStyle="rgb(100,100,100)";
   ctx.fillRect(0,0,canv.width,canv.height);
 
   ctx.fillStyle=snake_color;
+
+
   for(var i=0;i<trail.length;i++) {
       ctx.fillRect(trail[i].x*gs,trail[i].y*gs,gs-2,gs-2);
       if(trail[i].x==snakeX && trail[i].y==snakeY) {
-          tail = 5;
+        if(tail > 1){
+          DedSnek();
+        }
+        
       }
   }
 
@@ -78,4 +82,11 @@ function keyPush(evt) {
           xv=0;yv=1;
           break;
   }
+}
+function reload(){
+  window.location.href ="index.html"
+}
+//go to play again or play again
+function DedSnek(){
+  window.location.href = "playAgain.html";
 }
