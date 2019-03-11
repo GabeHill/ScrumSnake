@@ -1,17 +1,16 @@
-html, body {
-    height: 100%;
-}
-
 html{
     background: linear-gradient(#003840, #02A676);
     display: table;
     margin: auto;
+    height: 100%;
+    overflow: hidden;
 }
 
 body{
     color: aquamarine;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     vertical-align: middle;
+    height: 90%;
 }
 
 #b1{
@@ -38,12 +37,13 @@ body{
 
 #buttonsDiv{
     border: 5px dotted black;
-    width: 360px;
+    margin-top: -100px;
+    width: 235px;
 }
 
 #buttDiv{
     padding: 300px 0;
-    margin-left: 320px;
+    margin-left: 370px;
     width: 360px;
 }
 
