@@ -2,10 +2,16 @@
 window.onload=function() {
   canv=document.getElementById("board");
   ctx=canv.getContext("2d");
+  canvScore=document.getElementById("score");
+  ctxScore=canvScore.getContext("2d");
   document.addEventListener("keydown",keyPush);
   setInterval(game,1000/15);
 }
+
 var snake_color = '#A7FF12';
+//score locations
+slg=0;
+slb=24;
 //location of snake
 snakeX=snakeY=10;
 snakeX2=snakeY2=12;
@@ -68,8 +74,8 @@ function game() {
             DedSnek();
         }
     }
-
   }
+
 
   ctx.fillStyle='#3af'
   for(var i=0;i<trail2.length;i++) {
@@ -105,6 +111,16 @@ function game() {
   ctx.fillRect(fx*gs,fy*gs,gs-2,gs-2);
   console.log('x: '+ fx);
   console.log('y: '+ fy);
+
+  ctxScore.clearRect(0,0,canvScore.width,canvScore.height);
+  ctxScore.fillStyle='#A7FF12';
+  ctxScore.fillRect(slg*gs,0,gs-2,gs-2);
+  ctxScore.fillStyle='#3af';
+  ctxScore.fillRect(slb*gs,0,gs-2,gs-2);
+  ctxScore.fillStyle='#000';
+  ctxScore.font = "20px Ariel";
+  ctxScore.fillText(''+tail, 25, 18)
+  ctxScore.fillText(''+tail2, 23*gs, 18)
 }
 
 var KEYCODE_W = 87;
