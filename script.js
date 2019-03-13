@@ -48,6 +48,8 @@ vanillaMode.addEventListener('click', function() {
   img1.style.display = 'none';
   img2.style.display = 'inline';
   img3.style.display = 'inline';
+  canvScore.style.display = 'inline';
+  
 
   setInterval(game,1000/15);    
 });
@@ -56,9 +58,10 @@ speedMode.addEventListener('click', function() {
   canv.style.display = 'inline-block';
   modes.style.display = 'none';
   
-  img1.style.display = 'inline';
+  img1.style.display = 'none';
   img2.style.display = 'inline';
-  img3.style.display = 'none';
+  img3.style.display = 'inline';
+  canvScore.style.display = 'inline';
 
   setInterval(game, 40);
   aud.pause();
@@ -67,6 +70,10 @@ speedMode.addEventListener('click', function() {
 });
 
 noCollision.addEventListener('click', function () {
+  img1.style.display = 'none';
+  img2.style.display = 'inline';
+  img3.style.display = 'inline';
+  canvScore.style.display = 'inline';
   window.location.href = 'nocolision.html';
 })
 

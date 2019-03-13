@@ -1,14 +1,3 @@
-.container {
-  position: relative;
-  width: 650;
-  height: 675;
-}
-
-#score {
-  padding: 0% 28%;
-  
-}
-
 html{
     background: linear-gradient(#003840, #02A676);
     display: table;
@@ -70,7 +59,7 @@ body{
 }
 
 #img1{
-    width: 850px;
+    width: 200px;
     float:right;
 }
 
@@ -121,3 +110,8 @@ body{
     width: 100%;
     margin: 0 auto;
 }
+
+#score {
+    padding: 0% 28%;
+    
+  }

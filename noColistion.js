@@ -3,7 +3,19 @@ window.onload = function() {
     ctx = canv.getContext("2d");
     canvScore = document.getElementById("score");
     ctxScore = canvScore.getContext("2d");
+
+    var img2 = document.getElementById('img2');
+    var img3 = document.getElementById('img3');
+
+    
+    img2.style.display = 'inline';
+    img3.style.display = 'inline';
+    canvScore.style.display = 'inline';
+
+
     document.addEventListener("keydown", keyPush);
+
+    canvScore.style.display = 'inline';
     setInterval(game, 1000 / 15);
     //background music
     var rand = Math.random() * 10;
