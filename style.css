@@ -1,0 +1,88 @@
+.container {
+  position: relative;
+  width: 650;
+  height: 675;
+}
+
+#score {
+  padding: 0% 28%;
+  
+}
+
+html{
+    background: linear-gradient(#003840, #02A676);
+    display: table;
+    margin: auto;
+    height: 100%;
+    overflow: hidden;
+}
+
+body{
+    color: aquamarine;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    vertical-align: middle;
+    height: 90%;
+}
+
+#b1{
+    background-image: url('resources/snake_image.png');
+    background-repeat: no-repeat;
+    background-size: 615px;
+    background-position: 50% -8%;
+    width: 1000px;
+    vertical-align: middle;
+}
+
+#board{
+    border-style: outset;
+    border-width: 5px;
+}
+
+#ggs{
+    width: 625px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: overline dashed black;
+}
+
+#buttonsDiv{
+    border: 5px dotted black;
+    margin-top: -100px;
+    width: 235px;
+}
+
+#buttDiv{
+    padding: 300px 0;
+    margin-left: 370px;
+    width: 360px;
+}
+
+.But{
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    font-size: 40px;
+}
+
+#img1{
+    float: left;
+    width: 350px;
+    padding: 20px;
+    margin-top: 150px;
+}
+
+#img2{
+    float: right;
+    width: 350px;
+    padding: 20px;
+    margin-top: 150px;
+
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+#winner {
+  text-align: center;
+}
