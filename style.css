@@ -1,14 +1,3 @@
-.container {
-  position: relative;
-  width: 650;
-  height: 675;
-}
-
-#score {
-  padding: 0% 28%;
-  
-}
-
 html{
     background: linear-gradient(#003840, #02A676);
     display: table;
@@ -22,12 +11,13 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     vertical-align: middle;
     height: 90%;
+    width: 100%;
 }
 
 #b1{
     background-image: url('resources/snake_image.png');
     background-repeat: no-repeat;
-    background-size: 615px;
+    background-size: 655px;
     background-position: 50% -8%;
     width: 1000px;
     vertical-align: middle;
@@ -48,14 +38,16 @@ body{
 
 #buttonsDiv{
     border: 5px dotted black;
-    margin-top: -100px;
-    width: 235px;
+    margin-top: -50px;
+    width: 240px;
+    align-content: center;
 }
 
 #buttDiv{
     padding: 300px 0;
     margin-left: 370px;
     width: 360px;
+    align-items: center;
 }
 
 .But{
@@ -67,13 +59,18 @@ body{
 }
 
 #img1{
+    width: 200px;
+    float:right;
+}
+
+#img2{
     float: left;
     width: 350px;
     padding: 20px;
     margin-top: 150px;
 }
 
-#img2{
+#img3{
     float: right;
     width: 350px;
     padding: 20px;
@@ -85,4 +82,36 @@ body{
 
 #winner {
   text-align: center;
+  font-size: 40px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
+
+.modeButton{
+    text-align: center;
+    font-size: 40px;
+    width: 50%;
+    margin: 20px auto;
+    color: white;
+    cursor: pointer;
+    border: 10px dashed black;
+    text-align: center;
+}
+
+#container{
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    width: 100%;
+}
+
+#modes{
+    width: 100%;
+    margin: 0 auto;
+}
+
+#score {
+    padding: 0% 28%;
+    
+  }

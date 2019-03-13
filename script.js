@@ -28,6 +28,10 @@ var speedMode = document.getElementById('speedMode');
 var noCollision = document.getElementById('noCollision');
 var modes = document.getElementById('modes');
 
+var img1 = document.getElementById('img1');
+var img2 = document.getElementById('img2');
+var img3 = document.getElementById('img3');
+
 var canv = document.getElementById("board");
 var ctx = canv.getContext("2d");
 var canvScore = document.getElementById("score");
@@ -40,13 +44,25 @@ canv.style.display = 'none';
 vanillaMode.addEventListener('click', function() {
   canv.style.display = 'inline-block';
   modes.style.display = 'none';
+
+  img1.style.display = 'none';
+  img2.style.display = 'inline';
+  img3.style.display = 'inline';
+  canvScore.style.display = 'inline';
+
+
   setInterval(game, 1000 / 15);
-  aud.play();
 });
 
 speedMode.addEventListener('click', function() {
   canv.style.display = 'inline-block';
   modes.style.display = 'none';
+
+  img1.style.display = 'none';
+  img2.style.display = 'inline';
+  img3.style.display = 'inline';
+  canvScore.style.display = 'inline';
+
   setInterval(game, 40);
   aud.pause();
   aud.src = "music/nyoom.mp3";
