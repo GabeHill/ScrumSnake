@@ -1,5 +1,31 @@
+var aud = document.getElementById('audio');
+
+window.onload = function() {
+  canv = document.getElementById("board");
+  ctx = canv.getContext("2d");
+  canvScore = document.getElementById("score");
+  ctxScore = canvScore.getContext("2d");
+  document.addEventListener("keydown", keyPush);
+  setInterval(game, 1000 / 15);
+
+  //background music
+  var rand = Math.floor(Math.random() * 10);
+  console.log(rand);
+
+
+  var audioSRC = "";
+
+  if (rand % 2 == 0) {
+    audioSRC = "music/miiChannelPauses.mp3";
+  } else {
+    audioSRC = "music/wiiShopStroke.mp3";
+  }
+  aud.src = audioSRC;
+}
+
 var vanillaMode = document.getElementById('vanillaMode');
 var speedMode = document.getElementById('speedMode');
+var noCollision = document.getElementById('noCollision');
 var modes = document.getElementById('modes');
 
 var img1 = document.getElementById('img1');
@@ -11,11 +37,11 @@ var ctx=canv.getContext("2d");
 var canvScore=document.getElementById("score");
 var ctxScore=canvScore.getContext("2d");
 
-document.addEventListener("keydown",keyPush);
+document.addEventListener("keydown", keyPush);
 
 canv.style.display = 'none';
 
-vanillaMode.addEventListener('click', function () {
+vanillaMode.addEventListener('click', function() {
   canv.style.display = 'inline-block';
   modes.style.display = 'none';
 
@@ -26,7 +52,7 @@ vanillaMode.addEventListener('click', function () {
   setInterval(game,1000/15);    
 });
 
-speedMode.addEventListener('click', function () {
+speedMode.addEventListener('click', function() {
   canv.style.display = 'inline-block';
   modes.style.display = 'none';
   
@@ -34,8 +60,15 @@ speedMode.addEventListener('click', function () {
   img2.style.display = 'inline';
   img3.style.display = 'none';
 
-  setInterval(game,40);
+  setInterval(game, 40);
+  aud.pause();
+  aud.src = "music/nyoom.mp3";
+  aud.play();
 });
+
+noCollision.addEventListener('click', function () {
+  window.location.href = 'nocolision.html';
+})
 
 var snake_color = '#A7FF12';
 //score locations
@@ -133,7 +166,7 @@ function game() {
   while (trail2.length > tail2) {
     trail2.shift();
   }
-  var oof = new Audio("music/oof.mpe");
+  var oof = new Audio("music/oof.wav");
   if (fx == snakeX && fy == snakeY) {
     tail++;
     fx = Math.floor(Math.random() * tc);
@@ -214,6 +247,6 @@ function reload() {
 //go to play again or play again
 function DedSnek() {
   window.location.href = "playAgain.html?player=" + player + "";
-  var myAudio = new Audio('snake.mp3');
+  var myAudio = new Audio('music/snake.mp3');
   myAudio.play();
 }

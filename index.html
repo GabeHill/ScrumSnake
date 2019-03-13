@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="stylesheet" href="style.css">
   <title>SnAkE</title>
+
 </head>
+
 <body>
-  <h1 id='ggs'>The Glorious Game of Snake</h1>
+
+
+  <h1 id='ggs'>The Glorious Game of SnAkE</h1>
   <div class="container" width='650'>
     <div id='modes'>
       <!-- button for normal snake -->
@@ -15,6 +20,10 @@
       <!-- button for high speed mode -->
       <div class='modeButton' id='speedMode'>
         <p id='speed'>HIGH SPEED MODE</p>
+      </div>
+      <!-- no collision mode -->
+      <div class='modeButton' id='noCollision'>
+        <p>Scooby Doo Mode</p>
       </div>
     </div>
     <!-- game canvas -->
@@ -28,6 +37,12 @@
       <img src='resources/snake3.png' alt='Cannot view' id="img3" style="display: none"/>
     </div>
   </div>
+
+  <audio src="music/miiChannelPauses.mp3" id="audio" autoplay loop preload="metadata"> </audio>
+
+
+
   <script src='script.js'></script>
 </body>
+
 </html>
