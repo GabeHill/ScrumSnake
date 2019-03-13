@@ -12,7 +12,6 @@ window.onload = function() {
   var rand = Math.floor(Math.random() * 10);
   console.log(rand);
 
-  // var aud = document.getElementById('audio');
 
   var audioSRC = "";
 
@@ -41,6 +40,7 @@ vanillaMode.addEventListener('click', function() {
   canv.style.display = 'inline-block';
   modes.style.display = 'none';
   setInterval(game, 1000 / 15);
+  aud.play();
 });
 
 speedMode.addEventListener('click', function() {
