@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 window.onload = function() {
   canv = document.getElementById("board");
   ctx = canv.getContext("2d");
@@ -36,8 +37,32 @@ window.onload = function() {
   // }
 
 
+=======
+var vanillaMode = document.getElementById('vanillaMode');
+var speedMode = document.getElementById('speedMode');
+var modes = document.getElementById('modes');
+>>>>>>> f3ccc303568eb6a8ea18a1b2f7b6ff47db946187
 
-}
+var canv=document.getElementById("board");
+var ctx=canv.getContext("2d");
+var canvScore=document.getElementById("score");
+var ctxScore=canvScore.getContext("2d");
+
+document.addEventListener("keydown",keyPush);
+
+canv.style.display = 'none';
+
+vanillaMode.addEventListener('click', function () {
+  canv.style.display = 'inline-block';
+  modes.style.display = 'none';
+  setInterval(game,1000/15);    
+});
+
+speedMode.addEventListener('click', function () {
+  canv.style.display = 'inline-block';
+  modes.style.display = 'none';
+  setInterval(game,40);
+});
 
 var snake_color = '#A7FF12';
 //score locations
