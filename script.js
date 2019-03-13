@@ -1,4 +1,3 @@
-//reference video: https://www.youtube.com/watch?v=xGmXxpIj6vs
 window.onload=function() {
   canv=document.getElementById("board");
   ctx=canv.getContext("2d");
@@ -66,6 +65,8 @@ function game() {
   ctx.fillRect(0,0,canv.width,canv.height);
 
   ctx.fillStyle=snake_color;
+
+
   for(var i=0;i<trail.length;i++) {
     ctx.fillRect(trail[i].x*gs,trail[i].y*gs,gs-2,gs-2);
     if(trail[i].x==snakeX && trail[i].y==snakeY || trail[i].x==snakeX2 && trail[i].y==snakeY2) {
