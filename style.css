@@ -22,6 +22,7 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     vertical-align: middle;
     height: 90%;
+    width: 100%;
 }
 
 #b1{
@@ -69,13 +70,18 @@ body{
 }
 
 #img1{
+    width: 850px;
+    float:right;
+}
+
+#img2{
     float: left;
     width: 350px;
     padding: 20px;
     margin-top: 150px;
 }
 
-#img2{
+#img3{
     float: right;
     width: 350px;
     padding: 20px;
@@ -90,4 +96,28 @@ body{
   font-size: 40px;
   margin-bottom: 5px;
   margin-top: 5px;
+}
+
+.modeButton{
+    text-align: center;
+    font-size: 40px;
+    width: 50%;
+    margin: 20px auto;
+    color: white;
+    cursor: pointer;
+    border: 10px dashed black;
+    text-align: center;
+}
+
+#container{
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    width: 100%;
+}
+
+#modes{
+    width: 100%;
+    margin: 0 auto;
 }
