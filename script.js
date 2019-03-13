@@ -7,19 +7,35 @@ window.onload = function() {
   setInterval(game, 1000 / 15);
 
   //background music
-  var rand = Math.random() * 10;
+  var rand = Math.floor(Math.random() * 10);
+  console.log(rand);
+
+  var aud = document.getElementById('audio');
+
   var audioSRC = "";
+
   if (rand % 2 == 0) {
     audioSRC = "music/miiChannelPauses.mp3";
   } else {
     audioSRC = "music/wiiShopStroke.mp3";
   }
-  var myAudio = new Audio(audioSRC);
-  myAudio.addEventListener('ended', function() {
-    this.currentTime = 0;
-    this.play();
-  }, false);
-  myAudio.play();
+  aud.src = audioSRC;
+  // var backgroundAudio = new Audio(audioSRC);
+
+  // myAudio.addEventListener('ended', function() {
+  //   this.currentTime = 0;
+  //   this.play();
+  // }, false);
+
+  // var playPromise = backgroundAudio.play();
+
+  var isPlaying = aud.currentTime > 0 && !aud.paused && !aud.ended && aud.readyState > 2;
+  //
+  // if (!isPlaying) {
+  //   aud.play();
+  // }
+
+
 
 }
 
@@ -119,7 +135,7 @@ function game() {
   while (trail2.length > tail2) {
     trail2.shift();
   }
-  var oof = new Audio("music/oof.mpe");
+  var oof = new Audio("music/oof.wav");
   if (fx == snakeX && fy == snakeY) {
     tail++;
     fx = Math.floor(Math.random() * tc);
@@ -200,6 +216,6 @@ function reload() {
 //go to play again or play again
 function DedSnek() {
   window.location.href = "playAgain.html?player=" + player + "";
-  var myAudio = new Audio('snake.mp3');
+  var myAudio = new Audio('music/snake.mp3');
   myAudio.play();
 }
