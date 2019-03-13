@@ -53,9 +53,12 @@ speedMode.addEventListener('click', function() {
   aud.play();
 });
 
-noCollision.addEventListener('click', function () {
-  window.location.href = 'nocolision.html';
-})
+// noCollision.addEventListener('click', function() {
+//   window.location.href = 'nocolision.html';
+//   aud.pause();
+//   aud.src = "music/scoob.mp3";
+//   aud.play();
+// })
 
 var snake_color = '#A7FF12';
 //score locations
@@ -233,7 +236,7 @@ function reload() {
 }
 //go to play again or play again
 function DedSnek() {
+
   window.location.href = "playAgain.html?player=" + player + "";
-  var myAudio = new Audio('music/snake.mp3');
-  myAudio.play();
+
 }
