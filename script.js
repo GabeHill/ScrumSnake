@@ -25,6 +25,7 @@ window.onload = function() {
 
 var vanillaMode = document.getElementById('vanillaMode');
 var speedMode = document.getElementById('speedMode');
+var noCollision = document.getElementById('noCollision');
 var modes = document.getElementById('modes');
 
 var canv = document.getElementById("board");
@@ -52,6 +53,9 @@ speedMode.addEventListener('click', function() {
   aud.play();
 });
 
+noCollision.addEventListener('click', function () {
+  window.location.href = 'nocolision.html';
+})
 
 var snake_color = '#A7FF12';
 //score locations
