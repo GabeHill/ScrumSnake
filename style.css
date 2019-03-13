@@ -27,7 +27,7 @@ body{
 #b1{
     background-image: url('resources/snake_image.png');
     background-repeat: no-repeat;
-    background-size: 685px;
+    background-size: 655px;
     background-position: 50% -8%;
     width: 1000px;
     vertical-align: middle;
@@ -48,8 +48,8 @@ body{
 
 #buttonsDiv{
     border: 5px dotted black;
-    margin-top: -80px;
-    width: 232px;
+    margin-top: -50px;
+    width: 240px;
     align-content: center;
 }
 
@@ -65,7 +65,7 @@ body{
     color: white;
     padding: 10px;
     margin: 10px;
-    font-size: 35px;
+    font-size: 40px;
 }
 
 #img1{
@@ -88,4 +88,6 @@ body{
 #winner {
   text-align: center;
   font-size: 40px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
