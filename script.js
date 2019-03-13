@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var vanillaMode = document.getElementById('vanillaMode');
 var speedMode = document.getElementById('speedMode');
 var modes = document.getElementById('modes');
@@ -23,32 +22,6 @@ speedMode.addEventListener('click', function () {
   modes.style.display = 'none';
   setInterval(game,40);
 });
-=======
-window.onload = function() {
-  canv = document.getElementById("board");
-  ctx = canv.getContext("2d");
-  canvScore = document.getElementById("score");
-  ctxScore = canvScore.getContext("2d");
-  document.addEventListener("keydown", keyPush);
-  setInterval(game, 1000 / 15);
-
-  //background music
-  var rand = Math.random() * 10;
-  var audioSRC = "";
-  if (rand % 2 == 0) {
-    audioSRC = "music/miiChannelPauses.mp3";
-  } else {
-    audioSRC = "music/wiiShopStroke.mp3";
-  }
-  var myAudio = new Audio(audioSRC);
-  myAudio.addEventListener('ended', function() {
-    this.currentTime = 0;
-    this.play();
-  }, false);
-  myAudio.play();
-
-}
->>>>>>> 5baae49b601859de87b45da3b05c34b0f66f9b73
 
 var snake_color = '#A7FF12';
 //score locations
