@@ -1,3 +1,5 @@
+var aud = document.getElementById('audio');
+
 window.onload = function() {
   canv = document.getElementById("board");
   ctx = canv.getContext("2d");
@@ -7,21 +9,49 @@ window.onload = function() {
   setInterval(game, 1000 / 15);
 
   //background music
-  var rand = Math.random() * 10;
+  var rand = Math.floor(Math.random() * 10);
+  console.log(rand);
+
+
   var audioSRC = "";
+
   if (rand % 2 == 0) {
     audioSRC = "music/miiChannelPauses.mp3";
   } else {
     audioSRC = "music/wiiShopStroke.mp3";
   }
-  var myAudio = new Audio(audioSRC);
-  myAudio.addEventListener('ended', function() {
-    this.currentTime = 0;
-    this.play();
-  }, false);
-  myAudio.play();
-
+  aud.src = audioSRC;
 }
+
+var vanillaMode = document.getElementById('vanillaMode');
+var speedMode = document.getElementById('speedMode');
+var modes = document.getElementById('modes');
+
+var canv = document.getElementById("board");
+var ctx = canv.getContext("2d");
+var canvScore = document.getElementById("score");
+var ctxScore = canvScore.getContext("2d");
+
+document.addEventListener("keydown", keyPush);
+
+canv.style.display = 'none';
+
+vanillaMode.addEventListener('click', function() {
+  canv.style.display = 'inline-block';
+  modes.style.display = 'none';
+  setInterval(game, 1000 / 15);
+  aud.play();
+});
+
+speedMode.addEventListener('click', function() {
+  canv.style.display = 'inline-block';
+  modes.style.display = 'none';
+  setInterval(game, 40);
+  aud.pause();
+  aud.src = "music/nyoom.mp3";
+  aud.play();
+});
+
 
 var snake_color = '#A7FF12';
 //score locations
@@ -119,7 +149,7 @@ function game() {
   while (trail2.length > tail2) {
     trail2.shift();
   }
-  var oof = new Audio("music/oof.mpe");
+  var oof = new Audio("music/oof.wav");
   if (fx == snakeX && fy == snakeY) {
     tail++;
     fx = Math.floor(Math.random() * tc);
@@ -200,6 +230,6 @@ function reload() {
 //go to play again or play again
 function DedSnek() {
   window.location.href = "playAgain.html?player=" + player + "";
-  var myAudio = new Audio('snake.mp3');
+  var myAudio = new Audio('music/snake.mp3');
   myAudio.play();
 }

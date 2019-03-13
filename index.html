@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="stylesheet" href="style.css">
   <title>SnAkE</title>
+
 </head>
+
 <body>
+
+
   <h1 id='ggs'>The Glorious Game of SnAkE</h1>
   <div class="container" width='650'>
+    <div id='modes'>
+      <!-- button for normal snake -->
+      <div class='modeButton' id='vanillaMode'>
+        <p>Vanilla Mode</p>
+      </div>
+      <!-- button for high speed mode -->
+      <div class='modeButton' id='speedMode'>
+        <strong>HIGH SPEED MODE</strong>
+      </div>
+    </div>
+    <!-- game canvas -->
     <div>
       <canvas class='score' id='score' width='625' height='25'></canvas>
     </div>
     <div>
-      <img src='resources/snake3.png' alt='Cannot view' id="img1"/>
+      <img src='resources/snake3.png' alt='Cannot view' id="img1" />
       <canvas class='board' id='board' width='625' height='625'></canvas>
-      <img src='resources/snake3.png' alt='Cannot view' id="img2"/>
+      <img src='resources/snake3.png' alt='Cannot view' id="img2" />
     </div>
   </div>
+
+  <audio src="music/miiChannelPauses.mp3" id="audio" autoplay loop preload="metadata"> </audio>
+
+
+
   <script src='script.js'></script>
 </body>
+
 </html>
