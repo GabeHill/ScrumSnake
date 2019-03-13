@@ -3,6 +3,12 @@
   width: 650;
   height: 675;
 }
+
+#score {
+  padding: 0% 28%;
+  
+}
+
 html{
     background: linear-gradient(#003840, #02A676);
     display: table;
